@@ -72,11 +72,10 @@ public class DepartmentReviewServiceImpl implements DepartmentReviewService {
 	public int updateDepartmentReview(int userId, int departmentReviewId,
 			DepartmentReview departmentReview) {
 		Users user = departmentReviewDao.getUser(departmentReviewId);
-		if(user.getId() == userId){
+		
 			departmentReview.setUser(user);
 			return departmentReviewDao.updateDepartmentReview( departmentReview);
-		}
-		return 0;
+		
 	}
 
 	/* (non-Javadoc)
