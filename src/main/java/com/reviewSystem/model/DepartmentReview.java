@@ -33,7 +33,7 @@ public class DepartmentReview {
 	public void setDepartmentReviewId(int departmentReviewId) {
 		this.departmentReviewId = departmentReviewId;
 	}
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "user_name")
 	public Users getUser() {
 		return user;
@@ -41,7 +41,7 @@ public class DepartmentReview {
 	public void setUser(Users user) {
 		this.user = user;
 	}
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
 	@JoinColumn(name = "department_id")
 	public Department getDepartment() {
 		return department;

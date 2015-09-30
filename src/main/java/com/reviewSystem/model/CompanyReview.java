@@ -40,7 +40,7 @@ public class CompanyReview {
 		this.user = user;
 	}
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
 	@JoinColumn(name = "company_id")
 	public Company getCompany() {
 		return company;
