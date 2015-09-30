@@ -16,28 +16,28 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="JOB")
-public class Job {
+@Table(name = "PEER")
+public class Peer {
 	@Id
-	@Column(name = "JOB_ID")
-	private String jobId;
-	@Column(name = "JOB_DESIGNATION")
-	private String jobDesignation;
+	@Column(name = "PEER_ID")
+	private String peerId;
+	@Column(name = "PEER_NAME")
+	private String name;
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
 	@JoinColumn(name = "DEPARTMENT_ID")
 	private Department department;
 	
-	public String getJobId() {
-		return jobId;
+	public String getId() {
+		return peerId;
 	}
-	public void setJobId(String jobId) {
-		this.jobId = jobId;
+	public void setId(String id) {
+		this.peerId = id;
 	}
-	public String getJobDesignation() {
-		return jobDesignation;
+	public String getName() {
+		return name;
 	}
-	public void setJobDesignation(String jobDesignation) {
-		this.jobDesignation = jobDesignation;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public Department getDepartment() {
 		return department;

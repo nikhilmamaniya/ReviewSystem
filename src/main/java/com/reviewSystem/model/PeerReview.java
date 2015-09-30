@@ -16,17 +16,17 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "JOB_REVIEW")
-public class JobReview {
+@Table(name = "PEER_REVIEW")
+public class PeerReview {
 	@Id
-	@Column(name = "ID")
+	@Column(name = "REVIEW_ID")
 	private String id;
 	@Column(name = "REVIEW")
-	private String review;
+	private String Review;
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
-	@JoinColumn(name = "JOB_ID")
-	private Job job;
-		
+	@JoinColumn(name = "PEER_ID")
+	private Peer peer;
+	
 	public String getId() {
 		return id;
 	}
@@ -34,16 +34,16 @@ public class JobReview {
 		this.id = id;
 	}
 	public String getReview() {
-		return review;
+		return Review;
 	}
 	public void setReview(String review) {
-		this.review = review;
+		Review = review;
 	}
-	public Job getJob() {
-		return job;
+	public Peer getPeer() {
+		return peer;
 	}
-	public void setJob(Job job) {
-		this.job = job;
+	public void setPeer(Peer peer) {
+		this.peer = peer;
 	}
-		
+	
 }

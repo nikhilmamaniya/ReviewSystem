@@ -32,7 +32,7 @@ public class Department {
 	public void setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
 	}
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
 	@JoinColumn(name = "company_id")
 	public Company getCompany() {
 		return company;
