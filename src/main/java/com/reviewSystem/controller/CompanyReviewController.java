@@ -16,6 +16,7 @@ import com.reviewSystem.service.CompanyReviewService;
 import com.reviewSystem.service.CompanyService;
 
 @RestController
+@RequestMapping(value = "/review/company")
 public class CompanyReviewController{
 
 	@Autowired
@@ -31,7 +32,7 @@ public class CompanyReviewController{
 		this.companyReviewService = companyReviewService;
 	}
 
-	@RequestMapping(value = "/review/postCompanyReview/{companyId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{companyId}", method = RequestMethod.POST)
 	public int postCompanyReview(@PathVariable(value = "companyId") String companyId ,@RequestBody CompanyReview companyReview){
 		Company company = companyService.getCompany(Integer.parseInt(companyId));
 		companyReview.setCompany(company);
@@ -39,24 +40,24 @@ public class CompanyReviewController{
 		return companyReviewId;/*CompanyReviewService.postNewReview();*/
 	}
 
-	@RequestMapping(value = "/review/getCompanyReviews/{companyId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/all/{companyId}", method = RequestMethod.GET)
 	public List<CompanyReview> getCompanyReviews(@PathVariable(value = "companyId") String companyId){
 		return companyReviewService.getAllReviews(Integer.parseInt(companyId));
 	}
 	
-	@RequestMapping(value = "/review/getCompanyReview/{companyReviewId}",method = RequestMethod.GET)
+	@RequestMapping(value = "/{companyReviewId}",method = RequestMethod.GET)
 	public CompanyReview getCompanyReview(@PathVariable(value = "companyReviewId") String companyReviewId){
 		return companyReviewService.getCompanyReview(Integer.parseInt(companyReviewId));
 	}
 	
-	@RequestMapping(value = "/review/updateCompanyReview",method = RequestMethod.PUT)
-	public int updateCompanyReview(@RequestBody CompanyReview companyReview){
+	@RequestMapping(value="/{reviewId}",method = RequestMethod.PUT)
+	public int updateCompanyReview(@PathVariable(value = "reviewId")int reviewId, @RequestBody CompanyReview companyReview){
 		int companyReviewId = companyReview.getCompanyReviewId();
-		String username = "user12";
+		String username = "user9";
 		return companyReviewService.updateCompanyReview(username, companyReviewId, companyReview);		
 	}
 	
-	@RequestMapping(value = "/review/deleteCompanyReview/{companyReviewId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{companyReviewId}", method = RequestMethod.DELETE)
 	public boolean deleteCompanyReview(@PathVariable(value ="companyReviewId") String companyReviewId ){
 		String username="user12";
 		return companyReviewService.deleteReview(username, Integer.parseInt(companyReviewId));

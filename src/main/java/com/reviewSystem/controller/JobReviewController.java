@@ -40,7 +40,7 @@ public class JobReviewController {
 		return jobReviewService.getReview(reviewId);
 	}
 	
-	@RequestMapping(value = "/allReviews/{jobId}" , method = RequestMethod.GET)
+	@RequestMapping(value = "/all/{jobId}" , method = RequestMethod.GET)
 	public List<JobReview> getReviews(@PathVariable(value ="jobId") String jobId){
 		return jobReviewService.getReviews(jobId);
 	}
