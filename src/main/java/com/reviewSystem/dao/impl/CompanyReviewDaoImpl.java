@@ -6,13 +6,11 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.reviewSystem.dao.CompanyReviewDao;
 import com.reviewSystem.model.CompanyReview;
-import com.reviewSystem.model.Users;
 
 @Repository("CompanyReviewDao")
 public class CompanyReviewDaoImpl implements CompanyReviewDao {
@@ -75,7 +73,7 @@ public class CompanyReviewDaoImpl implements CompanyReviewDao {
 		return true;
 	}
 
-	@Override
+/*	@Override
 	public Users getUser(int companyReviewId) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		String queryString = "from CompanyReview cr where cr.companyReviewId =:companyReviewId";
@@ -83,6 +81,6 @@ public class CompanyReviewDaoImpl implements CompanyReviewDao {
 		query.setInteger("companyReviewId", companyReviewId);
 		CompanyReview companyReview = (CompanyReview) query.list().get(0);
 		return companyReview.getUser();
-	}
+	}*/
 
 }
