@@ -11,5 +11,5 @@ public interface CompanyReviewDao {
 	public CompanyReview getCompanyReview(int companyReviewId);
 	public int updateCompanyReview(  CompanyReview companyReview);
 	public boolean deleteReview(String username,int companyReviewId);
-	public Users getUser(int companyReviewId);
+	
 }
