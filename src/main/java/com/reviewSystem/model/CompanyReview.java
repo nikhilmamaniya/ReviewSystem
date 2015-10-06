@@ -19,7 +19,7 @@ import org.hibernate.annotations.Type;
 @Table(name="company_review")
 public class CompanyReview {
 	private int companyReviewId;
-	private Users user;
+	//private Users user;
 	private Company company;
 	private String review;
 	private Date createdDate;
@@ -35,14 +35,14 @@ public class CompanyReview {
 		this.companyReviewId = companyReviewId;
 	}
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	/*@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_name")
 	public Users getUser() {
 		return user;
 	}
 	public void setUser(Users user) {
 		this.user = user;
-	}
+	}*/
 	
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
 	@JoinColumn(name = "company_id")
