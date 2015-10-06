@@ -24,6 +24,7 @@ import com.reviewSystem.service.DepartmentService;
  *
  */
 @RestController
+@RequestMapping(value = "/review/department")
 public class DepartmentReviewController {
 	@Autowired
 	DepartmentReviewService departmentReviewService;
@@ -52,7 +53,7 @@ public class DepartmentReviewController {
 		this.departmentService = departmentService;
 	}
 	
-	@RequestMapping(value = "/review/postDepartmentReview/{departmentId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{departmentId}", method = RequestMethod.POST)
 	public int postDepartmentReview(@PathVariable(value = "departmentId") String departmentId ,@RequestBody DepartmentReview departmentReview){
 		Department department = departmentService.getDepartment(Integer.parseInt(departmentId));
 		departmentReview.setDepartment(department);
@@ -60,24 +61,24 @@ public class DepartmentReviewController {
 		return departmentReviewId;/*departmentReviewService.postNewReview();*/
 	}
 
-	@RequestMapping(value = "/review/getDepartmentReviews/{departmentId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/all/{departmentId}", method = RequestMethod.GET)
 	public List<DepartmentReview> getdepartmentReviews(@PathVariable(value = "departmentId") String departmentId){
 		return departmentReviewService.getAllReviews(Integer.parseInt(departmentId));
 	}
 	
-	@RequestMapping(value = "/review/getdepartmentReview/{departmentReviewId}",method = RequestMethod.GET)
+	@RequestMapping(value = "/{departmentReviewId}",method = RequestMethod.GET)
 	public DepartmentReview getdepartmentReview(@PathVariable(value = "departmentReviewId") String departmentReviewId){
 		return departmentReviewService.getDepartmentReview(Integer.parseInt(departmentReviewId));
 	}
 	
-	@RequestMapping(value = "/review/updatedepartmentReview",method = RequestMethod.PUT)
+	@RequestMapping(value = "/{reviewId}",method = RequestMethod.PUT)
 	public int updatedepartmentReview(@RequestBody DepartmentReview departmentReview){
 		int departmentReviewId = departmentReview.getDepartmentReviewId();
 		int userId = 11;
 		return departmentReviewService.updateDepartmentReview(userId, departmentReviewId, departmentReview);		
 	}
 	
-	@RequestMapping(value = "/review/deleteDepartmentReview/{departmentReviewId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{departmentReviewId}", method = RequestMethod.DELETE)
 	public boolean deletedepartmentReview(@PathVariable(value ="departmentReviewId") String departmentReviewId ){
 		int userId = 10;
 		return departmentReviewService.deleteReview(userId, Integer.parseInt(departmentReviewId));

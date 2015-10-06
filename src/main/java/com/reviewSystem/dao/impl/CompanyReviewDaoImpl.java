@@ -1,5 +1,6 @@
 package com.reviewSystem.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -35,6 +36,7 @@ public class CompanyReviewDaoImpl implements CompanyReviewDao {
 	@Override
 	public int postCompanyReview(CompanyReview companyReview) {
 		Session currentSession = sessionFactory.getCurrentSession();
+		companyReview.setCreatedDate(new Date());
 		currentSession.save(companyReview);
 		return companyReview.getCompanyReviewId();
 	}
@@ -60,7 +62,8 @@ public class CompanyReviewDaoImpl implements CompanyReviewDao {
 	@Override
 	public int updateCompanyReview(CompanyReview companyReview) {
 			Session currentSession = sessionFactory.getCurrentSession();
-			currentSession.merge(companyReview);
+			companyReview.setUpdatedDate(new Date());
+			currentSession.update(companyReview);
 		return companyReview.getCompanyReviewId();
 	}
 	

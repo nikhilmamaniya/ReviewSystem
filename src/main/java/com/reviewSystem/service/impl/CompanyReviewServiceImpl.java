@@ -43,7 +43,7 @@ public class CompanyReviewServiceImpl implements CompanyReviewService {
 	 */
 	@Override
 	public int postCompanyReview(Users user, CompanyReview companyReview) {
-		companyReview.setUser(user);
+		//companyReview.setUser(user);
 		int companyReviewId = companyReviewDao.postCompanyReview(companyReview);
 		return companyReviewId;
 	}
@@ -63,8 +63,8 @@ public class CompanyReviewServiceImpl implements CompanyReviewService {
 	public int updateCompanyReview(String username, int companyReviewId,
 			CompanyReview companyReview) {
 		Users user = companyReviewDao.getUser(companyReviewId);
-		if(user.getUserName() == username){
-			companyReview.setUser(user);
+		if(user.getUserName().equals(username)){
+			//companyReview.setUser(user);
 			return companyReviewDao.updateCompanyReview( companyReview);
 		}
 		return 0;
