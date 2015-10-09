@@ -1,50 +1,36 @@
 package com.reviewSystem.model;
 
-import java.util.Date;
+import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name="company_review")
-public class CompanyReview {
-	private int companyReviewId;
-	//private Users user;
+@PrimaryKeyJoinColumn(name = "review_id")
+public class CompanyReview extends Review{
+	
 	private Company company;
-	private String review;
-	private Date createdDate;
-	private Date updatedDate;
+	private List<QuestionAnswer> questionAnswers;
 	
-	@Id
-	@GeneratedValue
-	@Column(name="company_review_id")
-	public int getCompanyReviewId() {
-		return companyReviewId;
+	@OneToMany
+	@Cascade({CascadeType.SAVE_UPDATE})
+	@JoinColumn(name = "review_id")
+	public List<QuestionAnswer> getQuestionAnswers() {
+		return questionAnswers;
 	}
-	public void setCompanyReviewId(int companyReviewId) {
-		this.companyReviewId = companyReviewId;
+	public void setQuestionAnswers(List<QuestionAnswer> questionAnswers) {
+		this.questionAnswers = questionAnswers;
 	}
-	
-	/*@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_name")
-	public Users getUser() {
-		return user;
-	}
-	public void setUser(Users user) {
-		this.user = user;
-	}*/
-	
-	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
+	@ManyToOne
+	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "company_id")
 	public Company getCompany() {
 		return company;
@@ -53,29 +39,5 @@ public class CompanyReview {
 		this.company = company;
 	}
 	
-	@Column(name="review")
-	public String getReview() {
-		return review;
-	}
-	public void setReview(String review) {
-		this.review = review;
-	}
-	
-	@Column(name = "created_date")
-	@Type(type = "timestamp")
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-	public void setCreatedDate(Date date) {
-		this.createdDate = date;
-	}
-	@Column(name = "updated_date")
-	@Type(type = "timestamp")
-	public Date getUpdatedDate() {
-		return updatedDate;
-	}
-	public void setUpdatedDate(Date updatedDate) {
-		this.updatedDate = updatedDate;
-	}
 	
 }

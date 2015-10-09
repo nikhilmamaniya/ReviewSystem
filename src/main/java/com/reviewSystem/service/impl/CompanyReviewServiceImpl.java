@@ -42,10 +42,10 @@ public class CompanyReviewServiceImpl implements CompanyReviewService {
 	 * @see com.reviewSystem.service.CompanyReviewService#postCompanyReview(int, int, com.reviewSystem.model.CompanyReview)
 	 */
 	@Override
-	public int postCompanyReview(Users user, CompanyReview companyReview) {
+	public CompanyReview postCompanyReview(Users user, CompanyReview companyReview) {
 		//companyReview.setUser(user);
-		int companyReviewId = companyReviewDao.postCompanyReview(companyReview);
-		return companyReviewId;
+		
+		return companyReviewDao.postCompanyReview(companyReview);
 	}
 
 	@Override
@@ -55,23 +55,20 @@ public class CompanyReviewServiceImpl implements CompanyReviewService {
 	}
 
 	@Override
-	public CompanyReview getCompanyReview(int companyReviewId) {
+	public CompanyReview getCompanyReview(String companyReviewId) {
 		return companyReviewDao.getCompanyReview(companyReviewId);
 	}
 
 	@Override
-	public int updateCompanyReview(String username, int companyReviewId,
+	public CompanyReview updateCompanyReview(String username, String companyReviewId,
 			CompanyReview companyReview) {
-		Users user = companyReviewDao.getUser(companyReviewId);
-		if(user.getUserName().equals(username)){
-			//companyReview.setUser(user);
+	
 			return companyReviewDao.updateCompanyReview( companyReview);
-		}
-		return 0;
+		
 	}
 
 	@Override
-	public boolean deleteReview(String username, int companyReviewId) {
+	public boolean deleteReview(String username, String companyReviewId) {
 		companyReviewDao.deleteReview(username, companyReviewId);
 		return true;
 	}

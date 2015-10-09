@@ -33,11 +33,11 @@ public class CompanyReviewController{
 	}
 
 	@RequestMapping(value = "/{companyId}", method = RequestMethod.POST)
-	public int postCompanyReview(@PathVariable(value = "companyId") String companyId ,@RequestBody CompanyReview companyReview){
+	public CompanyReview postCompanyReview(@PathVariable(value = "companyId") String companyId ,@RequestBody CompanyReview companyReview){
 		Company company = companyService.getCompany(Integer.parseInt(companyId));
 		companyReview.setCompany(company);
-		int companyReviewId = companyReviewService.postCompanyReview(getUser(), companyReview);
-		return companyReviewId;/*CompanyReviewService.postNewReview();*/
+		
+		return companyReviewService.postCompanyReview(getUser(), companyReview);
 	}
 
 	@RequestMapping(value = "/all/{companyId}", method = RequestMethod.GET)
@@ -45,23 +45,21 @@ public class CompanyReviewController{
 		return companyReviewService.getAllReviews(Integer.parseInt(companyId));
 	}
 	
-	@RequestMapping(value = "/{companyReviewId}",method = RequestMethod.GET)
-	public CompanyReview getCompanyReview(@PathVariable(value = "companyReviewId") String companyReviewId){
-		return companyReviewService.getCompanyReview(Integer.parseInt(companyReviewId));
+	@RequestMapping(value = "/{reviewId}",method = RequestMethod.GET)
+	public CompanyReview getCompanyReview(@PathVariable(value = "reviewId") String reviewId){
+		return companyReviewService.getCompanyReview(reviewId);
 	}
 	
 	@RequestMapping(value="/{reviewId}",method = RequestMethod.PUT)
-	public int updateCompanyReview(@PathVariable(value = "reviewId")int reviewId, @RequestBody CompanyReview companyReview){
-		int companyReviewId = companyReview.getCompanyReviewId();
+	public CompanyReview updateCompanyReview(@PathVariable(value = "reviewId")String reviewId, @RequestBody CompanyReview companyReview){
 		String username = "user9";
-		return companyReviewService.updateCompanyReview(username, companyReviewId, companyReview);		
+		return companyReviewService.updateCompanyReview(username, reviewId, companyReview);		
 	}
 	
-	@RequestMapping(value = "/{companyReviewId}", method = RequestMethod.DELETE)
-	public boolean deleteCompanyReview(@PathVariable(value ="companyReviewId") String companyReviewId ){
+	@RequestMapping(value = "/{reviewId}", method = RequestMethod.DELETE)
+	public boolean deleteCompanyReview(@PathVariable(value ="reviewId") String reviewId ){
 		String username="user12";
-		return companyReviewService.deleteReview(username, Integer.parseInt(companyReviewId));
-		
+		return companyReviewService.deleteReview(username, reviewId);
 	}
 	
 	private Users getUser() {

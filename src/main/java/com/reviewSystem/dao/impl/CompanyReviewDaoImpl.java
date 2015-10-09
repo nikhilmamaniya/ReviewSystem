@@ -1,5 +1,6 @@
 package com.reviewSystem.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.reviewSystem.dao.CompanyReviewDao;
 import com.reviewSystem.model.CompanyReview;
+import com.reviewSystem.model.QuestionAnswer;
 
 @Repository("CompanyReviewDao")
 public class CompanyReviewDaoImpl implements CompanyReviewDao {
@@ -32,11 +34,12 @@ public class CompanyReviewDaoImpl implements CompanyReviewDao {
 	}
 
 	@Override
-	public int postCompanyReview(CompanyReview companyReview) {
+	public CompanyReview postCompanyReview(CompanyReview companyReview) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		companyReview.setCreatedDate(new Date());
+		companyReview.setCreated_date(new Date());
+		companyReview.setUpdated_date(new Date());
 		currentSession.save(companyReview);
-		return companyReview.getCompanyReviewId();
+		return companyReview;
 	}
 
 	@Override
@@ -49,24 +52,24 @@ public class CompanyReviewDaoImpl implements CompanyReviewDao {
 	}
 
 	@Override
-	public CompanyReview getCompanyReview(int companyReviewId) {
+	public CompanyReview getCompanyReview(String companyReviewId) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query  query = currentSession.createQuery("from CompanyReview cr where cr.companyReviewId = :companyReviewId");
-		query.setInteger("companyReviewId", companyReviewId);
+		Query  query = currentSession.createQuery("from CompanyReview cr where cr.id = :companyReviewId");
+		query.setString("companyReviewId", companyReviewId);
 		CompanyReview companyReview = (CompanyReview) query.list().get(0);
 		return companyReview;
 	}
 
 	@Override
-	public int updateCompanyReview(CompanyReview companyReview) {
+	public CompanyReview updateCompanyReview(CompanyReview companyReview) {
 			Session currentSession = sessionFactory.getCurrentSession();
-			companyReview.setUpdatedDate(new Date());
+			companyReview.setUpdated_date(new Date());
 			currentSession.update(companyReview);
-		return companyReview.getCompanyReviewId();
+		return companyReview;
 	}
 	
 	@Override
-	public boolean deleteReview(String username,  int companyReviewId) {
+	public boolean deleteReview(String username,  String companyReviewId) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		CompanyReview companyReview = (CompanyReview) currentSession.load(CompanyReview.class, companyReviewId);
 		currentSession.delete(companyReview);

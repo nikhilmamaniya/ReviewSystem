@@ -6,10 +6,10 @@ import com.reviewSystem.model.CompanyReview;
 import com.reviewSystem.model.Users;
 
 public interface CompanyReviewDao {
-	public int postCompanyReview(CompanyReview companyReview);
+	public CompanyReview postCompanyReview(CompanyReview companyReview);
 	public List<CompanyReview> fetchAllReviews(int companyId);
-	public CompanyReview getCompanyReview(int companyReviewId);
-	public int updateCompanyReview(  CompanyReview companyReview);
-	public boolean deleteReview(String username,int companyReviewId);
+	public CompanyReview getCompanyReview(String companyReviewId);
+	public CompanyReview updateCompanyReview(  CompanyReview companyReview);
+	public boolean deleteReview(String username,String companyReviewId);
 	
 }

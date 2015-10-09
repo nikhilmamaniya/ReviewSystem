@@ -13,9 +13,9 @@ import com.reviewSystem.model.Users;
  *
  */
 public interface CompanyReviewService {
-	public int postCompanyReview(Users user, CompanyReview companyReview);
+	public CompanyReview postCompanyReview(Users user, CompanyReview companyReview);
 	public List<CompanyReview> getAllReviews(int companyId);
-	public CompanyReview getCompanyReview(int companyReviewId);
-	public int updateCompanyReview(String username, int companyReviewId,CompanyReview companyReview);
-	public boolean deleteReview(String username, int companyReviewId);
+	public CompanyReview getCompanyReview(String companyReviewId);
+	public CompanyReview updateCompanyReview(String username, String companyReviewId,CompanyReview companyReview);
+	public boolean deleteReview(String username,String companyReviewId);
 }
